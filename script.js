@@ -19,6 +19,8 @@ function getAllUsers() {
 	return new Promise(function(resolve,reject){
 			$.get('http://jsonplaceholder.typicode.com/users', function(users){
 				resolve(users);
+			}).fail((error)=>{
+				reject(error);
 			})
 	})
 
@@ -28,6 +30,8 @@ function getAllPosts() {
 	return new Promise(function(resolve,reject){
 			$.get('http://jsonplaceholder.typicode.com/posts', function(posts){
 				resolve(posts);
+			}).fail((error)=>{
+				reject(error);
 			})
 	})
 }
@@ -36,6 +40,8 @@ function getAllAlbums() {
 	return new Promise(function(resolve,reject){
 			$.get('http://jsonplaceholder.typicode.com/albums', function(albums){
 				resolve(albums);
+			}).fail((error)=>{
+				reject(error);
 			})
 	})
 }
@@ -76,10 +82,10 @@ Promise.all([usersPromise, postsPromise, albumsPromise])
 
 		 limitedUsers.forEach((item) => {
 			  
-		//variable stores yet to be created list element...
+			//variable stores yet to be created list element...
 			var newListItem = document.createElement("li");
 			//content is added to yet to be list item....
-	newListItem.innerHTML = `Username: ${item.username} <br> Name: ${item.name} <br> Email: ${item.email} <br> Phone: ${item.phone} <br> Posts: ${posts[usersId].title} <br> Albums: ${albums[usersId].title}`;
+			newListItem.innerHTML = `Username: ${item.username} <br> Name: ${item.name} <br> Email: ${item.email} <br> Phone: ${item.phone} <br> Posts: ${posts[usersId].title} <br> Albums: ${albums[usersId].title}`;
 			//ul id is grabbed...
 			var userList = document.getElementById("userList");
 			//new list item is appended to the unordered list...
