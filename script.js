@@ -89,6 +89,8 @@ Promise.all([usersPromise, postsPromise, albumsPromise])
 
 
 	
+}).catch((err)=>{
+	console.log("Velociraptor")
 })
 
 }
