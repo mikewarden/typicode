@@ -1,0 +1,42 @@
+body { 
+	background-color: #000;
+	color: #fff;
+ }
+
+ button a {
+ 	text-decoration: none;
+ 	color: #fff;
+ 	background-color: #000;
+ }
+
+ button {
+ 	text-decoration: none;
+ 	color: #fff;
+ 	background-color: #000;
+ 	border-radius: 20px;
+ }
+
+ul li {
+	list-style-type: none;
+}
+
+ul {
+	border: 2px solid #fff;
+	border-radius: 20px;
+	padding: 15px;
+}
+
+#inputField {
+	color: #fff;
+ 	background-color: #000;
+	border: 2px solid #fff;
+	border-radius: 20px;
+	padding: 5px;
+}
+
+
+
+
+#results {
+	margin-top: 50px;
+}
