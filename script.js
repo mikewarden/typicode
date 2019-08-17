@@ -5,6 +5,7 @@ var limitedUsers;
 var limitedPosts;
 var inputUser;
 var inputPosts;
+var usersId;
 var usersPromise;
 var postsPromise;
 var albumsPromise;
@@ -84,7 +85,7 @@ Promise.all([usersPromise, postsPromise, albumsPromise])
 			//variable stores yet to be created list element...
 			var newListItem = document.createElement("li");
 			//content is added to yet to be list item....
-			newListItem.innerHTML = `Username: ${item.username} <br> Name: ${item.name} <br> Email: ${item.email} <br> Phone: ${item.phone} <br> Posts: ${posts[item.id].title} <br> Albums: ${albums[item.id].title}`;
+			newListItem.innerHTML = `Username: ${item.username} <br> Name: ${item.name} <br> Email: ${item.email} <br> Phone: ${item.phone}<br> Website: ${item.website}<br> Company: ${item.company.name} <br> Posts: ${posts[item.id].title} <br> Albums: ${albums[item.id].title}`;
 			//ul id is grabbed...
 			var userList = document.getElementById("userList");
 			//new list item is appended to the unordered list...
