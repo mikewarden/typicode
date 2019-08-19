@@ -1,42 +1,63 @@
-body { 
+body {
 	background-color: #000;
-	color: #fff;
- }
+	color: #16F3FF;
+	font-family: sans-serif;
+}
 
- button a {
- 	text-decoration: none;
- 	color: #fff;
- 	background-color: #000;
- }
 
- button {
- 	text-decoration: none;
- 	color: #fff;
- 	background-color: #000;
- 	border-radius: 20px;
- }
-
-ul li {
+li {
 	list-style-type: none;
 }
 
-ul {
-	border: 2px solid #fff;
-	border-radius: 20px;
-	padding: 15px;
+ul li {
+	border: 2px solid #16F3FF;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 5px;
+	background-color: #000;
+	color: #16F3FF;
+}
+
+#user-li {
+	width: 200px;
+	display: inline-grid;
+
+}
+
+#posts-li {
+	width: 400px;
+	display: inline-grid;
+}
+
+#albums-li {
+	width: 270px;
+	display: inline-grid;
+}
+#todos-li {
+	width: 380px;
+	display: inline-grid;
+}
+
+hr {
+	 border: 1px solid #16F3FF;
+	 width: 100%;
 }
 
 #inputField {
-	color: #fff;
- 	background-color: #000;
-	border: 2px solid #fff;
-	border-radius: 20px;
+	color: #16F3FF;
+	background-color: #000;
+	border: 2px solid #16F3FF;
+	border-radius: 10px;
 	padding: 5px;
 }
 
-
-
-
-#results {
-	margin-top: 50px;
+button {
+	color: #16F3FF;
+	background-color: #000;
+	border: 2px solid #16F3FF;
+	border-radius: 10px;
 }
+ button a {
+ 	text-decoration: none;
+ 	color: #16F3FF;
+ }
