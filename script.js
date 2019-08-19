@@ -1,93 +1,95 @@
-var userInput = document.getElementById("inputField");
-var searchBtn = document.getElementById("searchBtn");
-var listArea = document.getElementById("userList");
-var errorZone = document.getElementById("errorZone");
-var newListItem1 = document.createElement("li");
-var newListItem2 = document.createElement("li");
-var newListItem3 = document.createElement("li");
+var resultZone = document.getElementById("results");
+var inputField = document.getElementById("inputField");
+var submitBtn = document.getElementById("submitBtn");
+var limitedUsers;	
+var limitedPosts;
+var inputUser;
+var inputPosts;
+var usersId;
 var usersPromise;
 var postsPromise;
 var albumsPromise;
-var inputUser;
-var inputUserId;
+var users;
+var posts;
+var albums;
 
-function getUserData() {
-	let getUsersData = () => {
-		return new Promise((resolve, reject) => {
-			$.get('http://jsonplaceholder.typicode.com/users', (userData) => {
-				resolve(userData);
+function getUserData(data) {
+
+function getAllUsers() {
+	return new Promise(function(resolve,reject){
+			$.get('http://jsonplaceholder.typicode.com/users', function(users){
+				resolve(users);
 			})
-		})
-	}
-
-	let getPostsData = () => {
-		return new Promise((resolve, reject) => {
-			$.get('http://jsonplaceholder.typicode.com/posts', (postsData) => {
-				resolve(postsData);
-			})
-		})
-	}
-
-	let getAlbumsData = () => {
-		return new Promise((resolve, reject) => {
-			$.get('http://jsonplaceholder.typicode.com/albums', (albumsData) => {
-				resolve(albumsData);
-			})
-		})
-	}
-	usersPromise = getUsersData();
-	postsPromise = getPostsData();
-	albumsPromise = getAlbumsData();
-	
-
-	Promise.all([usersPromise, postsPromise, albumsPromise]).then((results) => {
-		users = results[0];
-		posts = results[1];
-		albums = results[2];
-
-		for (let i = 0; i < users.length; i ++) {
-			if (inputField.value == users[i].username) {
-				inputUser = users[i];
-			} 
-		}
-
-		newListItem1.setAttribute("id", "user-li");
-		newListItem2.setAttribute("id", "posts-li");
-		newListItem3.setAttribute("id", "albums-li");
-	
-
-		newListItem1.innerHTML += `<strong>Username:</strong>  ${inputUser.username}<hr/> <br> <strong>Name: </strong>${inputUser.name}<hr/><br> <strong>Company: </strong>${inputUser.company.name}<hr/><br> <strong>Email: </strong>${inputUser.email}<hr/><br><strong>Website: </strong>${inputUser.website}<hr/><br><strong>Phone: </strong>${inputUser.phone}`;
-
-
-		
-		newListItem2.innerHTML += `<strong>Posts:</strong><br>`;
-		for (let i = 1; i < posts.length; i ++) {
-			if (posts[i].userId == inputUser.id) {
-				newListItem2.innerHTML += `${posts[i].title}<hr/><br>`;
-			} 
-		}
-
-		
-		newListItem3.innerHTML += `<br><strong>Albums:</strong><br>`;
-		for (let i = 1; i < albums.length; i ++) {
-			if (albums[i].userId == inputUser.id) {
-			newListItem3.innerHTML += `${albums[i].title}<hr/><br>`;
-			}
-		}
-
-
-		userList.appendChild(newListItem1);
-		userList.appendChild(newListItem2);
-		userList.appendChild(newListItem3);
-	
-		
-		inputUserId = inputUser.id;
-		console.log(inputUser.id);
-	
-	}).catch((error) => {
-		errorZone.innerHTML = `Sorry cant find that user! Try Again.`
-		console.log("Velociraptor");
 	})
 
+}
+
+function getAllPosts() {
+	return new Promise(function(resolve,reject){
+			$.get('http://jsonplaceholder.typicode.com/posts', function(posts){
+				resolve(posts);
+			})
+	})
+}
+
+function getAllAlbums() {
+	return new Promise(function(resolve,reject){
+			$.get('http://jsonplaceholder.typicode.com/albums', function(albums){
+				resolve(albums);
+			})
+	})
+}
+
+ usersPromise = getAllUsers();
+ postsPromise = getAllPosts();
+ albumsPromise = getAllAlbums();
+
+Promise.all([usersPromise, postsPromise, albumsPromise])
+	.then(function(results){
+		 users = results[0];
+		 posts = results[1];
+		 albums = results[2];
+		 
+		//console.log(users);
+		//console.log(posts);
+		limitedUsers = users.filter((user) => {
+		 inputUser = inputField.value;
+		 usersId = user.userId;
+		 console.log(usersId);	
+			return user.username.includes(inputUser);
+		})
+		
+
+		
+
+		 // resultZone.innerHTML = posts[usersId].title;
+
+		//  limitedPosts = posts.filter((pst) => {
+		//  inputPosts = inputField.value;
+		// 	return pst.id.includes(inputPosts);
+		// })
+		 // console.log(limitedPosts);
+
+		 if (limitedUsers.length < 1) {
+			resultZone.innerHTML += "<br> No User found.";
+			console.log("error");
+		}
+
+		 limitedUsers.forEach((item) => {
+			  
+		//variable stores yet to be created list element...
+			var newListItem = document.createElement("li");
+			//content is added to yet to be list item....
+	newListItem.innerHTML = `Username: ${item.username} <br> Name: ${item.name} <br> Email: ${item.email} <br> Phone: ${item.phone} <br> Posts: ${posts[item.id].title} <br> Albums: ${albums[item.id].title}`;
+			//ul id is grabbed...
+			var userList = document.getElementById("userList");
+			//new list item is appended to the unordered list...
+			userList.appendChild(newListItem);
+
+		})
+
+
+	
+})
 
 }
